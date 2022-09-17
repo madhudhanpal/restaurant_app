@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Home Page</title>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">M P Restaurant</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Page 1</a></li>
+            <li><a href="#">Page 2</a></li>
+            <li><a href="#">Page 3</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <form action="checkout" name="checkout">
+        
+        <input type="submit">
+      </form>
+    
+      <form action="checkout"  name="checkout">
+        <div class="row">
+            <div class="col-sm-8">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Disciption</th>
+                        <th>Price</th>
+                        <th>Availability</th>
+                        <th>Quantity</th>
+                    </tr>
+                    </thead>
+
+                    {% for food in foods%}
+                    <tr>
+                        <td>{{food.name}}</td>
+                        <td>{{food.desc}}</td>
+                        <td>{{food.price}}</td>
+                        {% if food.qty  > 5 %}
+                            <td>In stock</td>
+                        {% else %}
+                            <td>Out of stock</td>
+                        {% endif %}
+                        
+                            {% if food.qty  > 5 %}
+                                <td><input type="number" min="1" max="100" name="foodqty"></td>
+                                <td><input type="text" name="itemname" value='{{food.name}}'  hidden="True"></td>
+                            {% else %}
+                                <td><input type="number" min="1" max="100", disabled=True></td>
+                            {% endif %}
+                    </tr>
+                    {% endfor%}
+
+                    <tr>
+                        <td></td><td></td><td></td><td></td>
+                        <td><input type="submit" value="Place Order" class="btn btn-success"></td>
+                    </tr>
+                    <tbody>
+
+            </div>
+        </div>
+      </form>
+</body>      
+</html>
